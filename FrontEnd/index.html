@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madtown Scouting</title>
+    <link rel="icon" type="image/x-icon" href="assets/coyote-blue-transparent-100.png">
+</head>
+<body>
+    <div id="beginPage">
+        <img src="assets/1323-coyote-blue-transparent-50.png" alt="1323 madtown robotics logo">
+        <div>
+            <h1>Scouter:</h1><input type="text" placeholder="First Name, Last Name">
+            <h1>Match Number:</h1><input type="text" placeholder="Quals 1">
+            <h1>Team Number:</h1><input type="text" placeholder="1323" id="teamNumberInput">
+            <button id="beginBtn">BEGIN</button> 
+        </div>
+    </div>
+    <div id="mainPage">
+        <!-- field map goes here -->
+        <img id="fieldMap" src="assets/infinite-recharge-field-map.png">
+        <div id="dataInput">
+            <div id="gamePeriodTitles">
+                <h1 id="autoTab" class="activeGamePeriodTitle">Auto</h1>
+                <h1 id="teleTab" class="gamePeriodTitle">Tele</h1>
+                <h1 id="endgameTab" class="gamePeriodTitle">Endgame</h1>
+            </div>
+            <div id="autoInput" class="gameSecInput">
+                <h1>Initiation Line Exited:</h1><div class="inputSec"><input type="radio" class="checkmark"><input type="radio" class="checkmark"></div>
+                <!-- change titles and add/remove as needed -->
+                <h1>Bottom Goal:</h1><div class="inputSec"><button id="stepDown1" class="decrementNum increDecreNum">-</button><input id="numInput1" type="number" class="numberInput" value="0" min="0"><button id="stepUp1" class="incrementNum increDecreNum">+</button></div>
+                <h1>Outer Goal:</h1><div class="inputSec"><button id="stepDown2" class="decrementNum increDecreNum">-</button><input id="numInput2" type="number" class="numberInput" value="0" min="0"><button id="stepUp2" class="incrementNum increDecreNum">+</button></div>
+                <h1>Inner Goal:</h1><div class="inputSec"><button id="stepDown3" class="decrementNum increDecreNum">-</button><input id="numInput3" type="number" class="numberInput" value="0" min="0"><button id="stepUp3" class="incrementNum increDecreNum">+</button></div>
+            </div>
+            <div id="teleInput" class="gameSecInput">
+                <!-- change titles and add/remove as needed -->
+                <h1>Bottom Goal:</h1><div class="inputSec"><button id="stepDown4" class="decrementNum increDecreNum">-</button><input id="numInput4" type="number" class="numberInput" value="0" min="0"><buttonn id="stepUp4" class="incrementNum increDecreNum">+</button></div>
+                <h1>Outer Goal:</h1><div class="inputSec"><button id="stepDown5" class="decrementNum increDecreNum">-</button><input id="numInput5" type="number" class="numberInput" value="0" min="0"><buttonn id="stepUp5" class="incrementNum increDecreNum">+</button></div>
+                <h1>Inner Goal:</h1><div class="inputSec"><button id="stepDown6" class="decrementNum increDecreNum">-</button><input id="numInput6" type="number" class="numberInput" value="0" min="0"><buttonn id="stepUp6" class="incrementNum increDecreNum">+</button></div>
+            </div>
+            <div id="endgameInput" class="gameSecInput">
+                <!-- add/remove endgame positions as required -->
+                <h1>Hang</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
+                <h1>Park</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
+                <h1>Out of Parking Area</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
+            </div>
+            <div id="notesInput" class="gameSecInput">
+                <h1>Notes:</h1><textarea></textarea>
+            </div>
+            <button type="submit">✓</button>
+            <h2 id="teamNumber"></h2>
+        </div>
+    </div>
+    <div id="submitPage">
+        <div>
+            <h1 id="submitPageText"></h1>
+            <button>YES</button>
+            <button>NO</button>  
+        </div>
+    </div>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+    
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    :root {
+        --primaryGray: #3B4044;
+        --secondaryGray: #B9B9B9;
+        --primaryBlue: #0074C8;
+        --primaryFontSize: 20px;
+        --decreaseBtnRed: #871515;
+        --increseBtnGreen: #034b03;
+        --primaryBorderRadius: 10px;
+        --defaultBorderProperties: solid 1px var(--primaryBlue);
+    }
+    h1 {
+        font-size: var(--primaryFontSize);
+    }
+    body {
+        background-color: var(--primaryGray);
+        font-family: "open sans";
+    }
+    /* begin page styling below */
+    #beginPage {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #beginPage img {
+        height: 75px;
+        margin-bottom: 25px;
+    }
+    #beginPage div {
+        background-color: white;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        text-align: right;
+        color: var(--primaryBlue);
+        padding: 15px;
+        border: var(--defaultBorderProperties);
+        border-radius: var(--primaryBorderRadius);
+        width: 500px;
+    }
+    #beginBtn {
+        grid-column: span 2;
+        background-color: white;
+        width: 50%;
+        margin: auto;
+        height: 30px;
+        border: var(--defaultBorderProperties);
+        border-radius: var(--primaryBorderRadius);
+    }
+    /* main page styling below */
+    #mainPage {
+        display: flex;
+        height: 100vh;
+        flex-direction: row;
+        padding: 15px;
+    }
+    #fieldMap {
+        height: 100%;
+        border: solid 3px white;
+        border-radius: var(--primaryBorderRadius);
+        margin-right: 15px;
+    }
+    #dataInput {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: var(--primaryBorderRadius);
+    }
+    #gamePeriodTitles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .gamePeriodTitle {
+        cursor: pointer;
+        color: var(--primaryGray);
+        text-align: center;
+        padding: 15px;
+        background-color: var(--secondaryGray);
+        border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
+    }
+    .gamePeriodTitle:hover {
+        background-color: var(--primaryGray);
+        color: white;
+    }
+    .activeGamePeriodTitle {
+        cursor: default;
+        background-color: white;
+        color: var(--primaryGray);
+        text-align: center;
+        padding: 15px;
+        border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
+    }
+    #teleInput {
+        display: none;
+    }
+    #endgameInput {
+        display: none;
+    }
+    .gameSecInput {
+        background-color: white;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: right;
+        color: var(--primaryBlue);
+        gap: 15px;
+    }
+    .inputSec {
+        display: flex;
+    }
+    #submitPage {
+        display: flex;
+        height: 100vh;
+    }
+    
+</style>
+<script>
+
+</script>
+</html>
