@@ -241,35 +241,18 @@
         color: white;
     }
 </style>
-<script></script>
-<script></script>
-<script></script>
+<script src="../../BackEnd/lib.js"></script>
+<script src="../../BackEnd/mainTemplate.js"></script>
+<script src="../../BackEnd/test.js"></script>
 <script>
 var beginPage = document.getElementById("beginPage")
 var mainPage = document.getElementById("mainPage")
 var beginBtn = document.getElementById("beginBtn")
 
 beginBtn.addEventListener("click", function() {showPage(beginPage, mainPage)})
-
-let stepUpBtns = document.querySelectorAll(".incrementNum")
-let stepDownBtns = document.querySelectorAll(".decrementNum")
-
-stepUpBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, false, true)})})
-stepDownBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, true, false)})})	
-
 function showPage(pageToHide, pageToShow) {
     pageToHide.style.display = "none"
     pageToShow.style.display = "flex"
-}
-
-function stepDownUp(id, down, up) {
-    id = id.charAt(id.length - 1)
-    var numberInput = "numInput" + id
-    if (down == true){
-        document.getElementById(numberInput).stepDown(1)
-    }else if (up == true){
-        document.getElementById(numberInput).stepUp(1)
-    }
 }
 </script>
 
