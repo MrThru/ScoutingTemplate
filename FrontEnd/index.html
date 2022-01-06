@@ -48,7 +48,7 @@
             <div id="notesInput" class="gameSecInput">
                 <h1>Notes:</h1><textarea></textarea>
             </div>
-            <button type="submit">✓</button>
+            <button id="doneButton">✓</button>
             <h2 id="teamNumber"></h2>
         </div>
     </div>
@@ -112,11 +112,17 @@
     #beginBtn {
         grid-column: span 2;
         background-color: white;
+        color: var(--primaryBlue);
         width: 50%;
         margin: auto;
         height: 30px;
         border: var(--defaultBorderProperties);
         border-radius: var(--primaryBorderRadius);
+        cursor: pointer;
+    }
+    #beginBtn:hover {
+        background-color: var(--primaryBlue);
+        color: white;
     }
     /* main page styling below */
     #mainPage {
@@ -136,6 +142,7 @@
         flex-direction: column;
         width: 100%;
         border-radius: var(--primaryBorderRadius);
+        position: relative;
     }
     #gamePeriodTitles {
         display: grid;
@@ -175,16 +182,83 @@
         text-align: right;
         color: var(--primaryBlue);
         gap: 15px;
+        padding: 15px;
     }
     .inputSec {
         display: flex;
+    }
+    .increDecreNum {
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        background-color: white;
+    }
+    .decrementNum {
+        border: solid var(--decreaseBtnRed) 1px;
+        color: var(--decreaseBtnRed);
+    }
+    .decrementNum:hover {
+        background-color: var(--decreaseBtnRed);
+        color: white;
+    }
+    .incrementNum {
+        border: solid var(--increseBtnGreen) 1px;
+        color: var(--increseBtnGreen);
+    }
+    .incrementNum:hover {
+        background-color: var(--increseBtnGreen);
+        color: white;
+    }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .numberInput {
+        width: 30px;
+        height: 30px;
+        margin: 0 15px;
+        text-align: center;
     }
     #submitPage {
         display: flex;
         height: 100vh;
     }
-    
+    #doneButton {
+        position: absolute;
+        right: 25px;
+        bottom: 25px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: white;
+        color: var(--primaryBlue);
+        cursor: pointer;
+        border: var(--defaultBorderProperties)
+    }
+    #doneButton:hover {
+        background-color: var(--primaryBlue);
+        color: white;
+    }
 </style>
-<script src="../../BackEnd/mainTemplate.js">
+<script src="../../BackEnd/lib.js"></script>
+<script src="../../BackEnd/mainTemplate.js"></script>
+<script src="../../BackEnd/test.js"></script>
+<script>
+var beginPage = document.getElementById("beginPage")
+var mainPage = document.getElementById("mainPage")
+var beginBtn = document.getElementById("beginBtn")
+
+beginBtn.addEventListener("click", function() {showPage(beginPage, mainPage)})
+
+function showPage(pageToHide, pageToShow) {
+    pageToHide.style.display = "none"
+    pageToShow.style.display = "flex"
+}
+
+
+
+    
 </script>
+
 </html>
