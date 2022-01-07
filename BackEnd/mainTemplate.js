@@ -26,15 +26,20 @@ function StepperFunction(stepUpBtn, stepDownBtn, numberDisplayInput) {
     var stepUpButton = stepUpBtn;
     var stepDownButton = stepDownBtn;
     var displayInput = numberDisplayInput;
-
     
 
+    this.stepUp = function(incrementValue) {
+        manualValue(currentValue + nullTo1(incrementValue));
+    };
     stepUp = function(incrementValue) {
-        this.manualValue(currentValue + nullTo1(incrementValue));
+        manualValue(currentValue + nullTo1(incrementValue));
+    }
+    this.stepDown = function(decrementValue) {
+        manualValue(currentValue - nullTo1(decrementValue));
     };
-    stepDown = function(reductionValue) {
-        this.manualValue(currentValue - nullTo1(reductionValue));
-    };
+    stepDown = function(decrementValue) {
+        manualValue(currentValue - nullTo1(decrementValue));
+    }
     manualValue = function(manualValue) {
         currentValue = manualValue;
         this.updateInputDisplay();
@@ -43,6 +48,7 @@ function StepperFunction(stepUpBtn, stepDownBtn, numberDisplayInput) {
         displayInput.value = currentValue;
     };
 
+    
 
     stepUpButton.addEventListener("click",function() {stepUp();} );
     stepDownButton.addEventListener("click",function() {stepDown();} );
