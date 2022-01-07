@@ -15,3 +15,19 @@ function elementFromName(name) {
 function elmenetFromClass(className, id) {
     return document.getElementsByClassName(className)[((id==null) ? 0 : id)];
 }
+function minValue(value, minValue) {
+    minValue = (minValue == null) ? 0 : minValue;
+    if (minValue > value) {
+        return minValue;
+    } else {
+        return value;
+    }
+}
+function maxValue(value, maxValue) {
+    maxValue = (maxValue == null) ? 0 : maxValue;
+    if (maxValue < value) {
+        return maxValue;
+    } else {
+        return value;
+    }
+}

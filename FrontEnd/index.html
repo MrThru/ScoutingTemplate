@@ -11,10 +11,10 @@
     <div id="beginPage">
         <img src="assets/1323-coyote-blue-transparent-50.png" alt="1323 madtown robotics logo">
         <div>
-            <h1>Scouter:</h1><input type="text" placeholder="First Name, Last Name">
+            <h1>Scouter:</h1><input type="text" placeholder="First Name, Last Name" id="scouterName">
             <h1>Match Number:</h1><input type="text" placeholder="Quals 1">
             <h1>Team Number:</h1><input type="text" placeholder="1323" id="teamNumberInput">
-            <button id="beginBtn">BEGIN</button> 
+            <button id="beginBtn" class="buttonStyling">BEGIN</button> 
         </div>
     </div>
     <div id="mainPage">
@@ -41,21 +41,23 @@
             </div>
             <div id="endInput" class="gameSecInput">
                 <!-- add/remove endgame positions as required -->
-                <h1>Hang</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
-                <h1>Park</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
-                <h1>Out of Parking Area</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
+                <h1>Hang:</h1><div class="inputSec"><input type="checkbox" class="checkbox"></div>
+                <h1>Level:</h1><div class="inputSec"><input type="checkbox" class="checkbox"></div>
+                <h1>Park:</h1><div class="inputSec"><input type="checkbox" class="checkbox"></div>
+                <h1>Out of Parking Area:</h1><div class="inputSec"><input type="checkbox" class="checkbox"></div>
             </div>
             <div id="notesInput" class="gameSecInput">
                 <h1>Notes:</h1><textarea></textarea>
             </div>
-            <button id="doneButton">✓</button>
+            <button id="doneButton" class="floatingBtns">✓</button>
         </div>
+        <button id="backButton" class="floatingBtns">←</button>
     </div>
     <div id="submitPage">
         <div>
             <h1 id="submitPageText"></h1>
-            <button>YES</button>
-            <button>NO</button>  
+            <button id="submitButton" class="buttonStyling">YES</button>
+            <button id="cancelSubmission" class="buttonStyling">NO</button>  
         </div>
     </div>
 </body>
@@ -76,6 +78,7 @@
         --increseBtnGreen: #034b03;
         --primaryBorderRadius: 10px;
         --defaultBorderProperties: solid 1px var(--primaryBlue);
+        --primaryFontSize: "Open Sans"
     }
     h1 {
         font-size: var(--primaryFontSize);
@@ -83,6 +86,7 @@
     body {
         background-color: var(--primaryGray);
         font-family: "open sans";
+        position: relative;
     }
     /* begin page styling below */
     #beginPage {
@@ -108,18 +112,21 @@
         border-radius: var(--primaryBorderRadius);
         width: 500px;
     }
-    #beginBtn {
-        grid-column: span 2;
-        background-color: white;
-        color: var(--primaryBlue);
-        width: 50%;
-        margin: auto;
-        height: 30px;
-        border: var(--defaultBorderProperties);
+    .buttonStyling {   
         border-radius: var(--primaryBorderRadius);
         cursor: pointer;
+        height: 30px;
+        margin: auto;
     }
-    #beginBtn:hover {
+    #beginBtn {
+        grid-column: span 2;
+        width: 50%;
+        margin: auto;
+        background-color: white;
+        color: var(--primaryBlue);
+        border: var(--defaultBorderProperties);
+    }
+    #beginBtn:hover{
         background-color: var(--primaryBlue);
         color: white;
     }
@@ -179,6 +186,7 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
+        grid-auto-rows: min-content;
         color: var(--primaryBlue);
         gap: 15px;
         padding: 25px;
@@ -187,16 +195,24 @@
         display: flex;
         align-items: center;
         justify-content: right;
+        padding: 15px 0;
     }
     .inputSec {
         display: flex;
         align-items: center;
+    }
+    .checkbox {
+        width: 30px;
+        height: 30px;
     }
     .increDecreNum {
         border-radius: 50%;
         height: 30px;
         width: 30px;
         background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .decrementNum {
         border: solid var(--decreaseBtnRed) 1px;
@@ -225,41 +241,104 @@
         margin: 0 15px;
         text-align: center;
     }
-    #submitPage {
-        display: flex;
-        height: 100vh;
+    #notesInput {
+        align-items: flex-start;
+        padding-top: 0;
     }
-    #doneButton {
+    #notesInput h1 {
+        padding: 0;
+    }
+    #notesInput textarea {
+        padding: 5px;
+        font-family: var(--primaryFontSize);
+        resize: vertical;
+    }
+    #submitPage {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
         position: absolute;
-        right: 25px;
-        bottom: 25px;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+    }
+    #submitPage div {
+        background-color: var(--primaryBlue);
+        border: var(--defaultBorderProperties);
+        border-radius: var(--primaryBorderRadius);
+        padding: 25px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 500px;
+    }
+    #submitPage h1 {
+        color: white;
+        text-align: center;
+        grid-column: span 2;
+        font-size: var(--primaryFontSize);
+    }
+    #submitPage button {
+        width: 50%;
+        background-color: var(--primaryBlue);
+        color: white;
+        border: solid 1px white;
+    }
+    #submitPage button:hover{
+        background-color: white;
+        color: var(--primaryBlue);
+    }
+    .floatingBtns {
+        position: absolute;
         width: 50px;
         height: 50px;
         border-radius: 50%;
         background-color: white;
         color: var(--primaryBlue);
         cursor: pointer;
+    }
+    #backButton {
+        left: 25px;
+        top: 25px;
+        border: 1px solid var(--primaryGray);
+    }
+    #doneButton {
+        right: 25px;
+        bottom: 25px;
         border: var(--defaultBorderProperties)
     }
+    #backButton:hover,
     #doneButton:hover {
         background-color: var(--primaryBlue);
         color: white;
     }
 </style>
+<script src="../../BackEnd/lib.js"></script>
+<script src="../../BackEnd/mainTemplate.js"></script>
+<script src="../../BackEnd/test.js"></script>
 <script>
-var beginPage = document.getElementById("beginPage")
-var mainPage = document.getElementById("mainPage")
-var beginBtn = document.getElementById("beginBtn")
+var beginPage = elementFromName("beginPage");
+var mainPage = elementFromName("mainPage");
+var beginBtn = elementFromName("beginBtn");
 
-var autoTab = document.getElementById("autoTab")
-var teleTab = document.getElementById("teleTab")
-var endTab = document.getElementById("endTab")
-var autoInput = document.getElementById("autoInput")
-var teleInput = document.getElementById("teleInput")
-var endInput = document.getElementById("endInput")
+var backBtn = elementFromName("backButton");
 
-let stepUpBtns = document.querySelectorAll(".incrementNum")
-let stepDownBtns = document.querySelectorAll(".decrementNum")
+var autoTab = elementFromName("autoTab")
+var teleTab = elementFromName("teleTab")
+var endTab = elementFromName("endTab")
+var autoInput = elementFromName("autoInput")
+var teleInput = elementFromName("teleInput")
+var endInput = elementFromName("endInput")
+var doneBtn = elementFromName("doneButton")
+var submitPage = elementFromName("submitPage")
+var submitPageText = elementFromName("submitPageText")
+var submitButton = elementFromName("submitButton")
+var cancelSubmission = elementFromName("cancelSubmission")
+
+// let stepUpBtns = document.querySelectorAll(".incrementNum")
+// let stepDownBtns = document.querySelectorAll(".decrementNum")
 
 beginBtn.addEventListener("click", function() {showPage(beginPage, mainPage)})
 
@@ -267,12 +346,26 @@ autoTab.addEventListener("click", function() {switchTab(true, false, false)})
 teleTab.addEventListener('click', function() {switchTab(false, true, false)})
 endTab.addEventListener("click", function() {switchTab(false, false, true)})
 
-stepUpBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, false, true)})})
-stepDownBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, true, false)})})	
+backBtn.addEventListener("click", function() {showPage(mainPage, beginPage)})
 
+doneBtn.addEventListener("click", function() {showPage(null, submitPage)})
+submitButton.addEventListener("click", collectAndSubmitData)
+cancelSubmission.addEventListener("click", function() {showPage(submitPage, mainPage)})
+// stepUpBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, false, true)})})
+// stepDownBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, true, false)})})	
+
+elementFromName("scouterName").value = localStorage.getItem("scouterName");
 function showPage(pageToHide, pageToShow) {
-    pageToHide.style.display = "none"
-    pageToShow.style.display = "flex"
+    if (pageToHide == beginPage) {
+        var teamNumberInput = elementFromName("teamNumberInput").value
+        submitPageText.textContent = "Are you sure you want to submit the data collected for team " + teamNumberInput + "?"
+    }
+    if (pageToHide !== null) {
+        pageToHide.style.display = "none"
+        pageToShow.style.display = "flex"
+    } else if (pageToHide === null) {
+        pageToShow.style.display = "flex"
+    }
 }
 
 function switchTab(auto, tele, end){
@@ -297,15 +390,20 @@ function switchTab(auto, tele, end){
     }
 }
 
-function stepDownUp(id, down, up) {
-    id = id.charAt(id.length - 1)
-    var numberInput = "numInput" + id
-    if (down == true){
-        document.getElementById(numberInput).stepDown(1)
-    }else if (up == true){
-        document.getElementById(numberInput).stepUp(1)
-    }
+function collectAndSubmitData() {
+    // collect data before reloading here //
+    localStorage.setItem("scouterName", elementFromName("scouterName").value);
+    location.reload()
 }
+// function stepDownUp(id, down, up) {
+//     id = id.charAt(id.length - 1)
+//     var numberInput = "numInput" + id
+//     if (down == true){
+//         elementFromName(numberInput).stepDown(1)
+//     }else if (up == true){
+//         elementFromName(numberInput).stepUp(1)
+//     }
+// }
 </script>
 
 </html>
