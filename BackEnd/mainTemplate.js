@@ -26,24 +26,34 @@ function StepperFunction(stepUpBtn, stepDownBtn, numberDisplayInput) {
     var stepUpButton = stepUpBtn;
     var stepDownButton = stepDownBtn;
     var displayInput = numberDisplayInput;
-
     
 
-    function stepUp(incrementValue) {
-        this.manualValue(currentValue + nullTo1(incrementValue));
+    this.stepUp = function(incrementValue) {
+        manualValue(currentValue + nullTo1(incrementValue));
     };
-    this.stepDown = function(reductionValue) {
-        this.manualValue(currentValue - nullTo1(reductionValue));
+    stepUp = function(incrementValue) {
+        manualValue(currentValue + nullTo1(incrementValue));
+    }
+    this.stepDown = function(decrementValue) {
+        manualValue(currentValue - nullTo1(decrementValue));
     };
-    this.manualValue = function(manualValue) {
+    stepDown = function(decrementValue) {
+        manualValue(currentValue - nullTo1(decrementValue));
+    }
+    manualValue = function(manualValue) {
         currentValue = manualValue;
         this.updateInputDisplay();
     };
-    this.updateInputDisplay = function() {
+    updateInputDisplay = function() {
         displayInput.value = currentValue;
     };
+
+    
+
     stepUpButton.addEventListener("click",function() {stepUp();} );
-    stepDownButton.addEventListener("click",function() {this.stepDown();} );
+    stepDownButton.addEventListener("click",function() {stepDown();} );
+
+    
 }
 /**
  * A Toggle Function that can be toggled with one, or two buttons(one button is on, and the other is off)
