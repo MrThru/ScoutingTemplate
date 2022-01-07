@@ -24,10 +24,10 @@
             <div id="gamePeriodTitles">
                 <h1 id="autoTab" class="activeGamePeriodTitle">Auto</h1>
                 <h1 id="teleTab" class="gamePeriodTitle">Tele</h1>
-                <h1 id="endgameTab" class="gamePeriodTitle">Endgame</h1>
+                <h1 id="endTab" class="gamePeriodTitle">Endgame</h1>
             </div>
             <div id="autoInput" class="gameSecInput">
-                <h1>Initiation Line Exited:</h1><div class="inputSec"><input type="radio" class="checkmark"><input type="radio" class="checkmark"></div>
+                <h1>Initiation Line Exited:</h1><div class="inputSec"><input type="checkbox" class="checkbox"></div>
                 <!-- change titles and add/remove as needed -->
                 <h1>Bottom Goal:</h1><div class="inputSec"><button id="stepDown1" class="decrementNum increDecreNum">-</button><input id="numInput1" type="number" class="numberInput" value="0" min="0"><button id="stepUp1" class="incrementNum increDecreNum">+</button></div>
                 <h1>Outer Goal:</h1><div class="inputSec"><button id="stepDown2" class="decrementNum increDecreNum">-</button><input id="numInput2" type="number" class="numberInput" value="0" min="0"><button id="stepUp2" class="incrementNum increDecreNum">+</button></div>
@@ -39,7 +39,7 @@
                 <h1>Outer Goal:</h1><div class="inputSec"><button id="stepDown5" class="decrementNum increDecreNum">-</button><input id="numInput5" type="number" class="numberInput" value="0" min="0"><buttonn id="stepUp5" class="incrementNum increDecreNum">+</button></div>
                 <h1>Inner Goal:</h1><div class="inputSec"><button id="stepDown6" class="decrementNum increDecreNum">-</button><input id="numInput6" type="number" class="numberInput" value="0" min="0"><buttonn id="stepUp6" class="incrementNum increDecreNum">+</button></div>
             </div>
-            <div id="endgameInput" class="gameSecInput">
+            <div id="endInput" class="gameSecInput">
                 <!-- add/remove endgame positions as required -->
                 <h1>Hang</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
                 <h1>Park</h1><div class="inputSec"><input type="radio" class="checkmark"></div>
@@ -49,7 +49,6 @@
                 <h1>Notes:</h1><textarea></textarea>
             </div>
             <button id="doneButton">✓</button>
-            <h2 id="teamNumber"></h2>
         </div>
     </div>
     <div id="submitPage">
@@ -155,6 +154,7 @@
         padding: 15px;
         background-color: var(--secondaryGray);
         border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
+        position: relative;
     }
     .gamePeriodTitle:hover {
         background-color: var(--primaryGray);
@@ -171,7 +171,7 @@
     #teleInput {
         display: none;
     }
-    #endgameInput {
+    #endInput {
         display: none;
     }
     .gameSecInput {
@@ -179,13 +179,18 @@
         height: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        text-align: right;
         color: var(--primaryBlue);
         gap: 15px;
-        padding: 15px;
+        padding: 25px;
+    }
+    .gameSecInput h1 {
+        display: flex;
+        align-items: center;
+        justify-content: right;
     }
     .inputSec {
         display: flex;
+        align-items: center;
     }
     .increDecreNum {
         border-radius: 50%;
@@ -241,18 +246,65 @@
         color: white;
     }
 </style>
-<script src="../../BackEnd/lib.js"></script>
-<script src="../../BackEnd/mainTemplate.js"></script>
-<script src="../../BackEnd/test.js"></script>
 <script>
 var beginPage = document.getElementById("beginPage")
 var mainPage = document.getElementById("mainPage")
 var beginBtn = document.getElementById("beginBtn")
 
+var autoTab = document.getElementById("autoTab")
+var teleTab = document.getElementById("teleTab")
+var endTab = document.getElementById("endTab")
+var autoInput = document.getElementById("autoInput")
+var teleInput = document.getElementById("teleInput")
+var endInput = document.getElementById("endInput")
+
+let stepUpBtns = document.querySelectorAll(".incrementNum")
+let stepDownBtns = document.querySelectorAll(".decrementNum")
+
 beginBtn.addEventListener("click", function() {showPage(beginPage, mainPage)})
+
+autoTab.addEventListener("click", function() {switchTab(true, false, false)})
+teleTab.addEventListener('click', function() {switchTab(false, true, false)})
+endTab.addEventListener("click", function() {switchTab(false, false, true)})
+
+stepUpBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, false, true)})})
+stepDownBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, true, false)})})	
+
 function showPage(pageToHide, pageToShow) {
     pageToHide.style.display = "none"
     pageToShow.style.display = "flex"
+}
+
+function switchTab(auto, tele, end){
+    autoInput.style.display = "none"
+    teleInput.style.display = "none"
+    endInput.style.display = 'none'
+    if (auto == true) {
+        autoInput.style.display = "grid"
+        autoTab.className = "activeGamePeriodTitle"
+        teleTab.className = "gamePeriodTitle"
+        endTab.className = 'gamePeriodTitle'
+    } else if (tele == true) {
+        teleInput.style.display = 'grid'
+        autoTab.className = "gamePeriodTitle"
+        teleTab.className = 'activeGamePeriodTitle'
+        endTab.className = "gamePeriodTitle"
+    } else if (end == true) {
+        endInput.style.display = 'grid'
+        autoTab.className = "gamePeriodTitle"
+        teleTab.className = "gamePeriodTitle"
+        endTab.className = "activeGamePeriodTitle"
+    }
+}
+
+function stepDownUp(id, down, up) {
+    id = id.charAt(id.length - 1)
+    var numberInput = "numInput" + id
+    if (down == true){
+        document.getElementById(numberInput).stepDown(1)
+    }else if (up == true){
+        document.getElementById(numberInput).stepUp(1)
+    }
 }
 </script>
 
