@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+    
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    /* can change page theme below */
+    :root {
+        --primaryGray: #3B4044;
+        --secondaryGray: #B9B9B9;
+        --primaryBlue: #0074C8;
+        --primaryFontSize: 16px;
+        --decreaseBtnRed: #d31e1e;
+        --increaseBtnGreen: #2ba12b;
+        --primaryBorderRadius: 10px;
+        --defaultBorderProperties: solid 1px var(--primaryBlue);
+        --primaryFontSize: "Open Sans"
+    }
+    /* sets all h1 elements to primary font size */
+    h1 {
+        font-size: var(--primaryFontSize);
+    }
+    body {
+        background-color: var(--primaryGray);
+        font-family: var(--primaryFontSize);
+        position: relative;
+    }
+    /* begin page styling below */
+    #beginPage {
+        display: flex;
+        height: 100vh;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    #beginPage img {
+        height: 75px;
+        margin-bottom: 25px;
+    }
+    #beginPage div {
+        background-color: white;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        text-align: right;
+        color: var(--primaryBlue);
+        padding: 15px;
+        border: var(--defaultBorderProperties);
+        border-radius: var(--primaryBorderRadius);
+        width: 80%;
+    }
+    .buttonStyling {   
+        border-radius: var(--primaryBorderRadius);
+        cursor: pointer;
+        height: 30px;
+        margin: auto;
+    }
+    #beginBtn {
+        grid-column: span 2;
+        width: 50%;
+        margin: auto;
+        background-color: white;
+        color: var(--primaryBlue);
+        border: var(--defaultBorderProperties);
+    }
+    #beginBtn:hover{
+        background-color: var(--primaryBlue);
+        color: white;
+    }
+    /* main page styling below */
+    #mainPage {
+        display: none;
+        height: 100vh;
+        flex-direction: column;
+        padding: 15px;
+    }
+    /* hides field map for desktop view */
+    #fieldMap {
+        display: none;
+    }
+    #fieldMapRotated {
+        border: solid 3px white;
+        border-radius: var(--primaryBorderRadius);
+        margin-bottom: 15px;
+        height: auto;
+        width: 100%;
+    }
+    #dataInput {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        border-radius: var(--primaryBorderRadius);
+        position: relative;
+        height: 100%;
+    }
+    #gamePeriodTitles {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .gamePeriodTitle {
+        cursor: pointer;
+        color: var(--primaryGray);
+        text-align: center;
+        padding: 15px;
+        background-color: var(--secondaryGray);
+        border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
+        position: relative;
+    }
+    .gamePeriodTitle:hover {
+        background-color: var(--primaryGray);
+        color: white;
+    }
+    /* sets styling for active game period TITLE which should default to auto */
+    .activeGamePeriodTitle {
+        cursor: default;
+        background-color: white;
+        color: var(--primaryGray);
+        text-align: center;
+        padding: 15px;
+        border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
+    }
+    /* sets styling for active game period INPUT which should default to auto*/
+    .gameSecInput {
+        background-color: white;
+        height: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: min-content;
+        color: var(--primaryBlue);
+        gap: 15px;
+        padding: 25px;
+    }
+    .gameSecInput h1 {
+        display: flex;
+        align-items: center;
+        justify-content: right;
+        padding: 15px 0;
+    }
+    .inputSec {
+        display: flex;
+        align-items: center;
+    }
+    .checkbox {
+        width: 30px;
+        height: 30px;
+    }
+    .increDecreNum {
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .decrementNum {
+        border: solid var(--decreaseBtnRed) 1px;
+        color: var(--decreaseBtnRed);
+    }
+    .decrementNum:hover {
+        background-color: var(--decreaseBtnRed);
+        color: white;
+    }
+    .incrementNum {
+        border: solid var(--increaseBtnGreen) 1px;
+        color: var(--increaseBtnGreen);
+    }
+    .incrementNum:hover {
+        background-color: var(--increaseBtnGreen);
+        color: white;
+    }
+    /* hides arrows in number inputs */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    .numberInput {
+        width: 30px;
+        height: 30px;
+        margin: 0 15px;
+        text-align: center;
+    }
+    /* hides tele and end input so that only auto input is displayed */
+    #teleInput {
+        display: none;
+    }
+    #endInput {
+        display: none;
+    }
+    #notesInput {
+        align-items: flex-start;
+        padding-top: 0;
+    }
+    #notesInput h1 {
+        padding: 0;
+    }
+    #notesInput textarea {
+        padding: 5px;
+        font-family: var(--primaryFontSize);
+        resize: vertical;
+    }
+    /* styling for back and done button below */
+    .floatingBtns {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: white;
+        color: var(--primaryBlue);
+        cursor: pointer;
+    }
+    #backButton {
+        left: 25px;
+        top: 25px;
+        border: 1px solid var(--primaryGray);
+    }
+    #doneButton {
+        right: 25px;
+        bottom: 25px;
+        border: var(--defaultBorderProperties)
+    }
+    #backButton:hover,
+    #doneButton:hover {
+        background-color: var(--primaryBlue);
+        color: white;
+    }
+    /* submit page styling below */
+    #submitPage {
+        display: none;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+    }
+    #submitPage div {
+        background-color: var(--primaryBlue);
+        border: var(--defaultBorderProperties);
+        border-radius: var(--primaryBorderRadius);
+        padding: 25px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 80%;
+    }
+    #submitPage h1 {
+        color: white;
+        text-align: center;
+        grid-column: span 2;
+        font-size: var(--primaryFontSize);
+        margin-bottom: 15px;
+    }
+    #submitPage button {
+        width: 50%;
+        background-color: var(--primaryBlue);
+        color: white;
+        border: solid 1px white;
+    }
+    #submitPage button:hover{
+        background-color: white;
+        color: var(--primaryBlue);
+    }

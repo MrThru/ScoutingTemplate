@@ -5,10 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Madtown Scouting</title>
-    <link rel="icon" type="image/x-icon" href="assets/coyote-blue-transparent-100.png">
+    <!-- favicon below -->
+    <link rel="icon" type="image/x-icon" href="assets/coyote-blue-transparent-100.png"> 
+    <!-- styling files for desktop/landscape and mobile/portrait -->
+    <link rel="stylesheet" media="screen and (min-device-width: 600px) and (orientation: landscape)" href="desktopStylesheet.css">
+    <link rel="stylesheet" media="screen and (max-device-width: 600px) and (orientation: portrait)" href="mobileStylesheet.css">
 </head>
 <body>
     <div id="beginPage">
+        <!-- begin page logo below -->
         <img src="assets/1323-coyote-blue-transparent-50.png" alt="1323 madtown robotics logo">
         <div>
             <h1>Scouter:</h1><input type="text" placeholder="First Name, Last Name" id="scouterName">
@@ -18,8 +23,10 @@
         </div>
     </div>
     <div id="mainPage">
-        <!-- field map goes here -->
+        <!-- field map for desktop view below -->
         <img id="fieldMap" src="assets/infinite-recharge-field-map.png">
+        <!-- field map for mobile view below -->
+        <img id="fieldMapRotated" src="assets/infinite-recharge-field-map-90-deg.png">
         <div id="dataInput">
             <div id="gamePeriodTitles">
                 <h1 id="autoTab" class="activeGamePeriodTitle">Auto</h1>
@@ -61,260 +68,6 @@
         </div>
     </div>
 </body>
-<style>
-    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
-    
-    * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
-    :root {
-        --primaryGray: #3B4044;
-        --secondaryGray: #B9B9B9;
-        --primaryBlue: #0074C8;
-        --primaryFontSize: 20px;
-        --decreaseBtnRed: #871515;
-        --increseBtnGreen: #034b03;
-        --primaryBorderRadius: 10px;
-        --defaultBorderProperties: solid 1px var(--primaryBlue);
-        --primaryFontSize: "Open Sans"
-    }
-    h1 {
-        font-size: var(--primaryFontSize);
-    }
-    body {
-        background-color: var(--primaryGray);
-        font-family: "open sans";
-        position: relative;
-    }
-    /* begin page styling below */
-    #beginPage {
-        display: flex;
-        height: 100vh;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    #beginPage img {
-        height: 75px;
-        margin-bottom: 25px;
-    }
-    #beginPage div {
-        background-color: white;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 15px;
-        text-align: right;
-        color: var(--primaryBlue);
-        padding: 15px;
-        border: var(--defaultBorderProperties);
-        border-radius: var(--primaryBorderRadius);
-        width: 500px;
-    }
-    .buttonStyling {   
-        border-radius: var(--primaryBorderRadius);
-        cursor: pointer;
-        height: 30px;
-        margin: auto;
-    }
-    #beginBtn {
-        grid-column: span 2;
-        width: 50%;
-        margin: auto;
-        background-color: white;
-        color: var(--primaryBlue);
-        border: var(--defaultBorderProperties);
-    }
-    #beginBtn:hover{
-        background-color: var(--primaryBlue);
-        color: white;
-    }
-    /* main page styling below */
-    #mainPage {
-        display: none;
-        height: 100vh;
-        flex-direction: row;
-        padding: 15px;
-    }
-    #fieldMap {
-        height: 100%;
-        border: solid 3px white;
-        border-radius: var(--primaryBorderRadius);
-        margin-right: 15px;
-    }
-    #dataInput {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        border-radius: var(--primaryBorderRadius);
-        position: relative;
-    }
-    #gamePeriodTitles {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-    }
-    .gamePeriodTitle {
-        cursor: pointer;
-        color: var(--primaryGray);
-        text-align: center;
-        padding: 15px;
-        background-color: var(--secondaryGray);
-        border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
-        position: relative;
-    }
-    .gamePeriodTitle:hover {
-        background-color: var(--primaryGray);
-        color: white;
-    }
-    .activeGamePeriodTitle {
-        cursor: default;
-        background-color: white;
-        color: var(--primaryGray);
-        text-align: center;
-        padding: 15px;
-        border-radius: var(--primaryBorderRadius) var(--primaryBorderRadius) 0 0;
-    }
-    #teleInput {
-        display: none;
-    }
-    #endInput {
-        display: none;
-    }
-    .gameSecInput {
-        background-color: white;
-        height: 100%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-auto-rows: min-content;
-        color: var(--primaryBlue);
-        gap: 15px;
-        padding: 25px;
-    }
-    .gameSecInput h1 {
-        display: flex;
-        align-items: center;
-        justify-content: right;
-        padding: 15px 0;
-    }
-    .inputSec {
-        display: flex;
-        align-items: center;
-    }
-    .checkbox {
-        width: 30px;
-        height: 30px;
-    }
-    .increDecreNum {
-        border-radius: 50%;
-        height: 30px;
-        width: 30px;
-        background-color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .decrementNum {
-        border: solid var(--decreaseBtnRed) 1px;
-        color: var(--decreaseBtnRed);
-    }
-    .decrementNum:hover {
-        background-color: var(--decreaseBtnRed);
-        color: white;
-    }
-    .incrementNum {
-        border: solid var(--increseBtnGreen) 1px;
-        color: var(--increseBtnGreen);
-    }
-    .incrementNum:hover {
-        background-color: var(--increseBtnGreen);
-        color: white;
-    }
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-    .numberInput {
-        width: 30px;
-        height: 30px;
-        margin: 0 15px;
-        text-align: center;
-    }
-    #notesInput {
-        align-items: flex-start;
-        padding-top: 0;
-    }
-    #notesInput h1 {
-        padding: 0;
-    }
-    #notesInput textarea {
-        padding: 5px;
-        font-family: var(--primaryFontSize);
-        resize: vertical;
-    }
-    #submitPage {
-        display: none;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        width: 100vw;
-        position: absolute;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(5px);
-    }
-    #submitPage div {
-        background-color: var(--primaryBlue);
-        border: var(--defaultBorderProperties);
-        border-radius: var(--primaryBorderRadius);
-        padding: 25px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        width: 500px;
-    }
-    #submitPage h1 {
-        color: white;
-        text-align: center;
-        grid-column: span 2;
-        font-size: var(--primaryFontSize);
-    }
-    #submitPage button {
-        width: 50%;
-        background-color: var(--primaryBlue);
-        color: white;
-        border: solid 1px white;
-    }
-    #submitPage button:hover{
-        background-color: white;
-        color: var(--primaryBlue);
-    }
-    .floatingBtns {
-        position: absolute;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background-color: white;
-        color: var(--primaryBlue);
-        cursor: pointer;
-    }
-    #backButton {
-        left: 25px;
-        top: 25px;
-        border: 1px solid var(--primaryGray);
-    }
-    #doneButton {
-        right: 25px;
-        bottom: 25px;
-        border: var(--defaultBorderProperties)
-    }
-    #backButton:hover,
-    #doneButton:hover {
-        background-color: var(--primaryBlue);
-        color: white;
-    }
-</style>
 <script src="../../BackEnd/lib.js"></script>
 <script src="../../BackEnd/mainTemplate.js"></script>
 <script src="../../BackEnd/test.js"></script>
@@ -322,9 +75,7 @@
 var beginPage = elementFromName("beginPage");
 var mainPage = elementFromName("mainPage");
 var beginBtn = elementFromName("beginBtn");
-
 var backBtn = elementFromName("backButton");
-
 var autoTab = elementFromName("autoTab")
 var teleTab = elementFromName("teleTab")
 var endTab = elementFromName("endTab")
@@ -337,9 +88,6 @@ var submitPageText = elementFromName("submitPageText")
 var submitButton = elementFromName("submitButton")
 var cancelSubmission = elementFromName("cancelSubmission")
 
-// let stepUpBtns = document.querySelectorAll(".incrementNum")
-// let stepDownBtns = document.querySelectorAll(".decrementNum")
-
 beginBtn.addEventListener("click", function() {showPage(beginPage, mainPage)})
 
 autoTab.addEventListener("click", function() {switchTab(true, false, false)})
@@ -351,8 +99,6 @@ backBtn.addEventListener("click", function() {showPage(mainPage, beginPage)})
 doneBtn.addEventListener("click", function() {showPage(null, submitPage)})
 submitButton.addEventListener("click", collectAndSubmitData)
 cancelSubmission.addEventListener("click", function() {showPage(submitPage, mainPage)})
-// stepUpBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, false, true)})})
-// stepDownBtns.forEach(item => {item.addEventListener("click", function(){stepDownUp(item.id, true, false)})})	
 
 elementFromName("scouterName").value = localStorage.getItem("scouterName");
 function showPage(pageToHide, pageToShow) {
@@ -367,7 +113,6 @@ function showPage(pageToHide, pageToShow) {
         pageToShow.style.display = "flex"
     }
 }
-
 function switchTab(auto, tele, end){
     autoInput.style.display = "none"
     teleInput.style.display = "none"
@@ -389,21 +134,10 @@ function switchTab(auto, tele, end){
         endTab.className = "activeGamePeriodTitle"
     }
 }
-
 function collectAndSubmitData() {
     // collect data before reloading here //
     localStorage.setItem("scouterName", elementFromName("scouterName").value);
     location.reload()
 }
-// function stepDownUp(id, down, up) {
-//     id = id.charAt(id.length - 1)
-//     var numberInput = "numInput" + id
-//     if (down == true){
-//         elementFromName(numberInput).stepDown(1)
-//     }else if (up == true){
-//         elementFromName(numberInput).stepUp(1)
-//     }
-// }
 </script>
-
 </html>
