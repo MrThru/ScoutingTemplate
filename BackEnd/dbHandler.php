@@ -27,3 +27,41 @@ $result = $service->spreadsheets_values->update(
     $params
 );
 ?>
+
+
+<!-- 
+$spreadsheetID = "13rIxkjKQaMI7t5B-tH6fSLR3BqNv6QFFbgu4NuK7rgU";
+
+class DB {
+    function connect() {
+        require __DIR__ . '/vendor/autoload.php';
+        $client = new \Google_Client();
+        $client->setApplicationName('Google Sheets');
+        $client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
+        $client->setAccessType('offline');
+        $client->setAuthConfig(__DIR__ . '/credentials.json');
+
+        $service = new Google_Service_Sheets($client);
+        return $service;
+    }
+
+    function addData($scouterName, $qualMatch, $teamNumber, ) {
+        $service = self::connect()->spreadsheets_values->append(
+            $spreadsheetID,
+
+        )
+    }
+    $body = new Google_Service_Sheets_ValueRange([
+        'values' => $values
+    ]);
+    $params = [
+        'valueInputOption' => 'RAW'
+    ];
+    $result = $service->spreadsheets_values->update(
+        $spreadsheetID,
+        $range,
+        $body,
+        $params
+    );
+}
+ -->

@@ -18,6 +18,8 @@ function getPreFuncObjectFromName(array, name) {
 }
 
 var stepperFunctionList = [];
+var eventFunctionList = [];
+var toggleFunctionList = [];
 /**
  * A Stepper function is used to increase, or decrease a value
  * @param {object} stepUpBtn - The StepUp HTML element
@@ -61,9 +63,17 @@ class StepperFunction {
     updateDisplay() {
         this.displayInput.value = this.currentValue;
     }
+    getValue() {
+        return this.displayInput.value;
+    }
+    getRawValue() {
+        return this.currentValue;
+    }
 
 
 }
+
+
 /**
  * A Toggle Function that can be toggled with one, or two buttons(one button is on, and the other is off)
  * @param {object} toggleButton - This button is required, and either acts as a toggleable switch, or a on switch state
@@ -71,6 +81,17 @@ class StepperFunction {
  * @param {object} [display] - A display element that is required if there are two buttons. This element will be green when true, and red when false
  * 
  */ 
+function createToggleFunction(toggleButton, secondToggleButton, display) {
+    var newToggleFunction = new ToggleFunction(toggleButton, secondToggleButton, display);
+    if (secondToggleButton==null) {
+        toggleButton.addEventListener("click", function() {newToggleFunction.toggleButton()});
+    } else {
+        toggleButton.addEventListener("click", function() {newToggleFunction.updateDisplay(true)});
+        secondToggleButton.addEventListener("click", function() {newToggleFunction.updateDisplay(false)});
+
+    }
+    toggleFunctinList.push(newToggleFunction);
+}
 class ToggleFunction {
     constructor(toggleButton, secondToggleButton, display) {
         this.trueStateColor = "Green";
@@ -95,24 +116,37 @@ class ToggleFunction {
         if (overrideState == null) 
             displayColor = (this.toggleState) ? this.trueStateColor : this.falseStateColor;
         else 
+            this.toggleState = overrideState;
             displayColor = (overrideState) ? this.trueStateColor : this.falseStateColor;
 
         this.stateDisplay.style.backgroundColor = displayColor;
     }
 }
-
-function createEventUpdateFunction(input, updateFunction, activationMode) {
-    var newEventUpdateFunction = new EventUpdateFunction(input, updateFunction, activationMode);
+/**
+ * A function that creates an even listener and 
+ * 
+ * 
+ */ 
+function createEventUpdateFunction(input, updateFunction, eufName, activationMode) {
+    var newEventUpdateFunction = new EventUpdateFunction(input, updateFunction, eufName, activationMode);
     input.addEventListener(activationMode, function() {updateFunction()});
+    eventFunctionList.push(newEventUpdateFunction);
 }
 
 class EventUpdateFunction {
-    constructor(input, updateFunction, activationMode) {
+    constructor(input, updateFunction, eufName, activationMode) {
         this.inputEvent = input;
         this.updateFunction = updateFunction;
         this.activationMode = activationMode;
+        this.name = eufName;
     }
     update() {
-
+        this.updateFunction();
     }
+    changeFunctionCall(newFunction) {
+        this.updateFunction = newFunction;
+    }
+    
+
 }
+
