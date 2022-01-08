@@ -17,8 +17,8 @@
         --defaultBorderProperties: solid 1px var(--primaryBlue);
         --primaryFontSize: "Open Sans"
     }
-    /* sets all h1 elements to primary font size*/
-    h1 {
+    /* sets all h2 elements to primary font size*/
+    h2 {
         font-size: var(--primaryFontSize);
     }
     body {
@@ -129,7 +129,7 @@
         gap: 15px;
         padding: 25px;
     }
-    .gameSecInput h1 {
+    .gameSecInput h2 {
         display: flex;
         align-items: center;
         justify-content: right;
@@ -191,7 +191,7 @@
         align-items: flex-start;
         padding-top: 0;
     }
-    #notesInput h1 {
+    #notesInput h2 {
         padding: 0;
     }
     #notesInput textarea {
@@ -246,7 +246,7 @@
         grid-template-columns: 1fr 1fr;
         width: 500px;
     }
-    #submitPage h1 {
+    #submitPage h2 {
         color: white;
         text-align: center;
         grid-column: span 2;
