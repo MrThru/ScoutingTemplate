@@ -15,6 +15,9 @@ function elementFromName(name) {
 function elmenetFromClass(className, id) {
     return document.getElementsByClassName(className)[((id==null) ? 0 : id)];
 }
+function getElementInputValue(name) {
+    return elementFromName(name).value;
+}
 function minValue(value, minValue) {
     minValue = (minValue == null) ? 0 : minValue;
     if (minValue > value) {
@@ -30,4 +33,8 @@ function maxValue(value, maxValue) {
     } else {
         return value;
     }
+}
+
+function createCookie(name, value) {
+    document.cookie = name + "=" + value;
 }

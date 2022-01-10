@@ -1,39 +1,10 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
-$client = new \Google_Client();
-$client->setApplicationName('Google Sheets');
-$client->setScopes([\Google_Service_Sheets::SPREADSHEETS]);
-$client->setAccessType('offline');
-$client->setAuthConfig(__DIR__ . '/credentials.json');
 
-$service = new Google_Service_Sheets($client);
-$spreadsheetID = "13rIxkjKQaMI7t5B-tH6fSLR3BqNv6QFFbgu4NuK7rgU";
+$spreadsheetID = "";
 
-$range = "DB1!A1:B10";
-$values = [
-    ["Test", "Test1"],
-];
+class DataBase {
 
-$body = new Google_Service_Sheets_ValueRange([
-    'values' => $values
-]);
-$params = [
-    'valueInputOption' => 'RAW'
-];
-$result = $service->spreadsheets_values->update(
-    $spreadsheetID,
-    $range,
-    $body,
-    $params
-);
-?>
-
-
-<!-- 
-$spreadsheetID = "13rIxkjKQaMI7t5B-tH6fSLR3BqNv6QFFbgu4NuK7rgU";
-
-class DB {
-    function connect() {
+    public static function connect() {
         require __DIR__ . '/vendor/autoload.php';
         $client = new \Google_Client();
         $client->setApplicationName('Google Sheets');
@@ -45,23 +16,38 @@ class DB {
         return $service;
     }
 
-    function addData($scouterName, $qualMatch, $teamNumber, ) {
-        $service = self::connect()->spreadsheets_values->append(
-            $spreadsheetID,
 
-        )
+
+
+    public static function addData($scouterName, $matchNumber, $teamNumber, $dataArray) {
+        print("ran");
+        $service = self::connect();
+        $range = "DB1!A2:Z1000";
+        $values = [
+            [$scouterName, $matchNumber, $teamNumber]
+        ];
+        foreach ($dataArray as $index => $value) {
+            array_push($values[0], $value); 
+        }
+        $body = new Google_Service_Sheets_ValueRange([
+            'values' => $values
+        ]);
+        $params = [
+            'valueInputOption' => 'RAW'
+        ];
+        $insert = [
+            "insertDataOption" => "INSERT_ROWS"
+        ];
+        $result = $service->spreadsheets_values->append(
+            "",
+            $range,
+            $body,
+            $params,
+            $insert
+        );
     }
-    $body = new Google_Service_Sheets_ValueRange([
-        'values' => $values
-    ]);
-    $params = [
-        'valueInputOption' => 'RAW'
-    ];
-    $result = $service->spreadsheets_values->update(
-        $spreadsheetID,
-        $range,
-        $body,
-        $params
-    );
-}
- -->
+}    
+
+
+?>
+

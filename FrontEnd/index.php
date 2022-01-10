@@ -1,3 +1,23 @@
+<?php
+    include("../BackEnd/dbHandler.php");
+    function saveData() {
+        $scouterName = $_COOKIE["scouterName"];
+        $teamNumber = $_COOKIE["teamNumber"];
+        $matchNumber = $_COOKIE["matchNumber"];
+        $dataArray = $_COOKIE["dataArray"];
+
+        DataBase::addData($scouterName, $matchNumber, $teamNumber, explode(",", $dataArray));
+    }
+
+    if(isset($_POST["submit"])) {
+        saveData();
+    }
+    
+    
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +40,7 @@
         <img src="assets/1323coyoteBlueTransparent50.png" alt="1323 blue coyote logo">
         <div>
             <h2>Scouter:</h2><input type="text" placeholder="First Name, Last Name" id="scouterName">
-            <h2>Match Number:</h2><input type="text" placeholder="Quals 1">
+            <h2>Match Number:</h2><input type="text" placeholder="Quals 1" id="matchNumber">
             <h2>Team Number:</h2><input type="text" placeholder="1323" id="teamNumberInput">
             <button id="beginBtn" class="buttonStyling">BEGIN</button> 
         </div>
@@ -65,9 +85,11 @@
     </div>
     <div id="submitPage">
         <div>
-            <h2 id="submitPageText"></h2>
-            <button id="submitButton" class="buttonStyling">YES</button>
-            <button id="cancelSubmission" class="buttonStyling">NO</button>  
+            <form method="post">
+                <h2 id="submitPageText"></h2>
+                <button id="submitButton" class="buttonStyling" name="submit" type="submit">YES</button>
+                <button id="cancelSubmission" class="buttonStyling">NO</button>
+            </form>
         </div>
     </div>
 </body>
@@ -99,11 +121,13 @@ endTab.addEventListener("click", function() {switchTab(false, false, true)})
 
 backBtn.addEventListener("click", function() {showPage(mainPage, beginPage)})
 
-doneBtn.addEventListener("click", function() {showPage(null, submitPage)})
+doneBtn.addEventListener("click", function() {showPage(null, submitPage); saveData();})
 submitButton.addEventListener("click", collectAndSubmitData)
 cancelSubmission.addEventListener("click", function() {showPage(submitPage, mainPage)})
 
 elementFromName("scouterName").value = localStorage.getItem("scouterName");
+createCookie("submitted", "false");
+
 function showPage(pageToHide, pageToShow) {
     if (pageToHide == beginPage) {
         var teamNumberInput = elementFromName("teamNumberInput").value
@@ -140,7 +164,15 @@ function switchTab(auto, tele, end){
 function collectAndSubmitData() {
     // collect data before reloading here //
     localStorage.setItem("scouterName", elementFromName("scouterName").value);
-    location.reload()
+    
+
+    setTimeout(() => {
+        location.reload();
+    }, 5000);
 }
+
+// var form = document.getElementById("form");
+// function handleForm(event) { event.preventDefault(); } 
+// form.addEventListener('submit', handleForm);
 </script>
 </html>
